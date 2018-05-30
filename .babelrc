@@ -1,0 +1,18 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "target": {
+          "chrome": 52,
+          "browsers": [
+            "last 2 versions",
+            "safari 7"
+          ]
+        }
+      }
+    ]
+  ],
+  "plugins": ["transform-runtime"],
+  "comments": false
+}

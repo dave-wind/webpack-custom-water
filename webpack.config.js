@@ -25,7 +25,7 @@ module.exports = {
         dry: false // Default: false - remove files
       }
     ),
-    new ExtractTextPlugin('dave.css')
+    new ExtractTextPlugin('css/dave-[hash].css')
   ],
   module: {
     rules: [
@@ -40,14 +40,19 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
+        use: ExtractTextPlugin.extract({ // 分离打包css 不是加载css 进style
           fallback: 'style-loader',
           use: [
-            {loader: 'css-loader', options: {importLoaders: 1}},
+            {loader: 'css-loader', options: {importLoaders: 2, minimize: true}},
             {loader: 'postcss-loader'},
             {loader: 'sass-loader'} // sass 放后面 因为要先加载处理 sass
           ]
         })
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
       }
     ]
   }
